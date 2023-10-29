@@ -1,8 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
-import userReducer from "../features/loggedUserSlice"
+import loggedUserReducer from "../features/loggedUserSlice";
 
-export default configureStore({
+const store = configureStore({
     reducer:{
-        user: userReducer,
+        loggedUser: loggedUserReducer,
     }
 })
+
+export type AppDispatch = typeof store.dispatch
+export default store

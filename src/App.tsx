@@ -1,15 +1,15 @@
 import React from "react";
-import Register from "./components/Register";
 import {useSelector} from "react-redux";
 import {selectUser} from "./features/loggedUserSlice";
 import Home from "./components/Home";
+import Login from "./components/Login";
 
 const App = () => {
-    const loggedUser = useSelector(selectUser)
+    let loggedUser = useSelector(selectUser)
 
-    return <div>
-        {loggedUser ? <Home/> : <Register/>}
-    </div>;
+    return (<div>
+        {loggedUser.loggedUser ? <Home/> : <Login/>}
+    </div>);
 };
 
 export default App;

@@ -6,7 +6,7 @@ const Home = () => {
     const user = useSelector(selectUser)
     return(
         <div>
-            <h1>Welcome <span>{user.email}</span></h1>
+            <h1>Welcome <span>{user.loggedUser}</span></h1>
         </div>
     )
 }
