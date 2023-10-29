@@ -19,7 +19,7 @@ const Home = () => {
 
     return(
         <div>
-            <h1>Welcome <span>{user.loggedUser}</span></h1>
+            <h1>Welcome <span>{user.loggedUser.name}</span></h1>
             <button onClick={handleLogout}>Logout</button>
             <div>
                 <span>posts</span>

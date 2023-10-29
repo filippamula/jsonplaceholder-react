@@ -11,8 +11,9 @@ const Login = () => {
     const dispatch = useDispatch<AppDispatch>()
     const handleLogin = (event: React.FormEvent) => {
         event.preventDefault()
-        if(users.find(user => user.email === email) !== undefined) {
-            dispatch(login(email))
+        let user = users.find(user => user.email === email)
+        if(user!== undefined) {
+            dispatch(login(user))
             return
         }
         console.log("User not found")
