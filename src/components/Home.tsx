@@ -1,8 +1,8 @@
-import React, { Fragment, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { logout, selectUser } from "../features/loggedUserSlice";
 import { AppDispatch } from "../app/store";
-import { fetchPosts, selectPosts } from "../features/PostsSlice";
+import { fetchPosts } from "../features/PostsSlice";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import Posts from "./Posts";
@@ -10,8 +10,6 @@ import Posts from "./Posts";
 const Home = () => {
     const user = useSelector(selectUser).loggedUser
     const dispatch = useDispatch<AppDispatch>()
-
-    const posts = useSelector(selectPosts)
 
     useEffect(() => {
         dispatch(fetchPosts());}, [dispatch]);
@@ -22,8 +20,8 @@ const Home = () => {
 
     const navigation = [
         { name: 'Posts', active: true },
-        { name: 'Something', active: false },
-        { name: 'Else', active: false },
+        { name: 'Photos', active: false },
+        { name: 'Todo', active: false },
     ]
 
     function classNames(...classes: string[]) {
