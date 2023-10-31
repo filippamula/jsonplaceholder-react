@@ -10,7 +10,7 @@ interface CommentsProps {
     postId: number;
 }
 
-const Comments: React.FC<CommentsProps> = ({postId}) => {
+const CommentsComponent: React.FC<CommentsProps> = ({postId}) => {
 
     const dispatch = useDispatch<AppDispatch>()
 
@@ -38,4 +38,4 @@ const Comments: React.FC<CommentsProps> = ({postId}) => {
     );
 };
 
-export default Comments;
+export default CommentsComponent;

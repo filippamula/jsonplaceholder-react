@@ -1,6 +1,6 @@
 import { useDispatch, useSelector} from "react-redux";
-import Home from "./components/Home";
-import Login from "./components/Login";
+import HomeComponent from "./components/HomeComponent";
+import LoginComponent from "./components/LoginComponent";
 import { selectUser } from "./features/loggedUserSlice";
 import { useEffect } from "react";
 import { fetchUsers } from "./features/UsersSlice";
@@ -14,7 +14,7 @@ const App = () => {
         dispatch(fetchUsers());}, [dispatch]);
 
     return (<div>
-        {loggedUser.loggedUser ? <Home/> : <Login/>}
+        {loggedUser.loggedUser ? <HomeComponent/> : <LoginComponent/>}
     </div>);
 };
 

@@ -5,9 +5,9 @@ import { AppDispatch } from "../app/store";
 import { fetchPosts } from "../features/PostsSlice";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline'
-import Posts from "./Posts";
+import PostsComponent from "./PostsComponent";
 
-const Home = () => {
+const HomeComponent = () => {
     const user = useSelector(selectUser).loggedUser
     const dispatch = useDispatch<AppDispatch>()
 
@@ -175,11 +175,11 @@ const Home = () => {
         </header>
         <main>
             <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-                <Posts/>
+                <PostsComponent/>
             </div>
         </main>
     </div>
     )
 }
 
-export default Home
+export default HomeComponent

@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectPosts } from "../features/PostsSlice";
-import { AppDispatch } from "../app/store";
 import { selectUsers } from "../features/UsersSlice";
 import { UserCircleIcon, ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline";
 import { Collapse, Ripple, initTE } from "tw-elements";
-import Comments from "./Comments";
-import { fetchComments } from "../features/CommentsSlice";
+import CommentsComponent from "./CommentsComponent";
 
-const Posts = () => {
+const PostsComponent = () => {
     initTE({Collapse, Ripple})
 
     const posts = useSelector(selectPosts)
@@ -54,6 +51,8 @@ const Posts = () => {
                       type="button"
                       data-te-collapse-init
                       data-te-target={"#post"+post.id+"Comments"}
+                      aria-expanded="false"
+                      aria-controls={"post"+post.id+"Comments"}
                     >
                       <ChatBubbleBottomCenterTextIcon className="h-10 w-10"/>
                     </button>
@@ -61,7 +60,7 @@ const Posts = () => {
                 <div className="!visible hidden w-full" id={"post"+post.id+"Comments"}
                   data-te-collapse-item
                 >
-                  <Comments postId={post.id}/>
+                  <CommentsComponent postId={post.id}/>
                 </div>
               </article>
             ))}
@@ -71,4 +70,4 @@ const Posts = () => {
     );
 };
 
-export default Posts;
+export default PostsComponent;

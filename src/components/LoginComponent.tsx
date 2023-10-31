@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../app/store";
 import { selectUsers } from "../features/UsersSlice";
 
-const Login = () => {
+const LoginComponent = () => {
     const [email, setEmail] = useState("")
     const users = useSelector(selectUsers)
 
@@ -68,4 +68,4 @@ const Login = () => {
     )
 };
 
-export default Login;
+export default LoginComponent;
