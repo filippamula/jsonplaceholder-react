@@ -2,10 +2,10 @@ import { Fragment, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { logout, selectUser } from "../features/loggedUserSlice";
 import { AppDispatch } from "../app/store";
-import { fetchPosts } from "../features/PostsSlice";
+import { fetchPosts, selectPosts } from "../features/PostsSlice";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline'
-import PostsComponent from "./PostsComponent";
+import PostComponent from "./PostComponent";
 
 const HomeComponent = () => {
     const user = useSelector(selectUser).loggedUser
@@ -13,6 +13,8 @@ const HomeComponent = () => {
 
     useEffect(() => {
         dispatch(fetchPosts());}, [dispatch]);
+
+    const posts = useSelector(selectPosts)
 
     const handleLogout = () => {
         dispatch(logout())
@@ -167,15 +169,11 @@ const HomeComponent = () => {
             </>
         )}
         </Disclosure>
-
-        <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Posts</h1>
-        </div>
-        </header>
         <main>
             <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-                <PostsComponent/>
+                {posts.map((post) => (
+                    <PostComponent post={post}/>
+                ))}
             </div>
         </main>
     </div>

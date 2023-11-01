@@ -4,11 +4,15 @@ import { selectUsers } from "../features/UsersSlice";
 import { UserCircleIcon, ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline";
 import { Collapse, Ripple, initTE } from "tw-elements";
 import CommentsComponent from "./CommentsComponent";
+import { Post } from "../model/Post";
 
-const PostsComponent = () => {
+interface PostsProps {
+    post: Post;
+}
+
+const PostComponent :React.FC<PostsProps> = ({post}) => {
     initTE({Collapse, Ripple})
 
-    const posts = useSelector(selectPosts)
     const users = useSelector(selectUsers)
 
     const getUser = (id: number) => {
@@ -18,10 +22,10 @@ const PostsComponent = () => {
     }
 
     return (
-        <div className="bg-white">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            {posts.map((post) => (
+        // <div className="bg-white">
+        // <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        //   <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+        //     {posts.map((post) => (
               <article key={post.id} className="flex mx-auto my-10 px-5 py-3 flex-col items-start justify-between shadow-lg ring-1 ring-inset ring-gray-300 rounded-lg">
                 <div className="relative flex items-center gap-x-4">
                   <UserCircleIcon className="h-10 w-10 rounded-full bg-gray-50" />
@@ -51,8 +55,6 @@ const PostsComponent = () => {
                       type="button"
                       data-te-collapse-init
                       data-te-target={"#post"+post.id+"Comments"}
-                      aria-expanded="false"
-                      aria-controls={"post"+post.id+"Comments"}
                     >
                       <ChatBubbleBottomCenterTextIcon className="h-10 w-10"/>
                     </button>
@@ -63,11 +65,11 @@ const PostsComponent = () => {
                   <CommentsComponent postId={post.id}/>
                 </div>
               </article>
-            ))}
-          </div>
-        </div>
-      </div>
+            // ))}
+      //     </div>
+      //   </div>
+      // </div>
     );
 };
 
-export default PostsComponent;
+export default PostComponent;
