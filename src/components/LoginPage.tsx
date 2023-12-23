@@ -5,7 +5,7 @@ import { AppDispatch } from "../app/store";
 import { selectUsers } from "../features/UsersSlice";
 import { useNavigate } from "react-router-dom";
 
-const LoginComponent = () => {
+const LoginPage = () => {
     const [email, setEmail] = useState("")
     const users = useSelector(selectUsers)
     const navigate = useNavigate()
@@ -71,4 +71,4 @@ const LoginComponent = () => {
     )
 };
 
-export default LoginComponent;
+export default LoginPage;
