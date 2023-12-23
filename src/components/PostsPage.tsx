@@ -7,7 +7,7 @@ import NavBarComponent from "./NavBarComponent";
 import PostComponent from "./PostComponent";
 import { useNavigate } from "react-router-dom";
 
-const HomeComponent = () => {
+const PostsPage = () => {
     const user = useSelector(selectUser).loggedUser
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
@@ -48,4 +48,4 @@ const HomeComponent = () => {
     )
 }
 
-export default HomeComponent
+export default PostsPage;

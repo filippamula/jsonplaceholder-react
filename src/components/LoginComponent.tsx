@@ -16,7 +16,7 @@ const LoginComponent = () => {
         let user = users.find(user => user.email === email)
         if (user !== undefined) {
             dispatch(login(user))
-            navigate("/home")
+            navigate("/posts")
             return
         }
         console.log("User not found")
