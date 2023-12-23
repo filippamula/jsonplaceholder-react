@@ -38,7 +38,9 @@ const HomeComponent = () => {
             <main>
                 <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                     {posts.map((post) => (
-                        <PostComponent post={post} />
+                        <article key={post.id} className="flex mx-auto my-10 px-5 py-3 flex-col items-start justify-between shadow-lg ring-1 ring-inset ring-gray-300 rounded-lg">
+                            <PostComponent post={post} />
+                        </article>
                     ))}
                 </div>
             </main>
