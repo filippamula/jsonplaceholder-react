@@ -4,13 +4,15 @@ import { logout, selectUser } from "../features/loggedUserSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch } from "../app/store"
 import { Fragment } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
+import path from "path"
 
 const NavBarComponent = () => {
 
     const user = useSelector(selectUser).loggedUser
     const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const handleLogout = () => {
         dispatch(logout())
@@ -18,9 +20,9 @@ const NavBarComponent = () => {
     }
 
     const navigation = [
-        { name: 'Posts', path: '/posts', active: true },
-        { name: 'Albums', path: '/albums', active: false },
-        { name: 'Todo', path: '/todo', active: false },
+        { name: 'Posts', path: '/posts', active: "/posts" == location.pathname },
+        { name: 'Albums', path: '/albums', active: "/albums" == location.pathname },
+        { name: 'Todo', path: '/todo', active: "/todo" == location.pathname },
     ]
 
 
@@ -54,6 +56,7 @@ const NavBarComponent = () => {
                                                     'rounded-md px-3 py-2 text-sm font-medium'
                                                 )}
                                                 aria-current={item.active ? 'page' : undefined}
+                                                onClick={() => navigate(item.path)}
                                             >
                                                 {item.name}
                                             </a>

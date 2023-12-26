@@ -24,14 +24,6 @@ const PostsPage = () => {
 
     const posts = useSelector(selectPosts)
 
-    const handleLogout = () => {
-        dispatch(logout())
-    }
-
-    function classNames(...classes: string[]) {
-        return classes.filter(Boolean).join(' ')
-    }
-
     return (
         <div className="min-h-full">
             <NavBarComponent />
