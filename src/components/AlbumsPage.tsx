@@ -5,6 +5,8 @@ import { selectUser } from "../features/loggedUserSlice";
 import NavBarComponent from "./NavBarComponent";
 import { fetchAlbums, selectAlbums } from "../features/AlbumsSlice";
 import { AppDispatch } from "../app/store";
+import AlbumComponent from "./AlbumComponent";
+import { fetchPhotos } from "../features/PhotosSlice";
 
 const AlbumsPage = () => {
     const user = useSelector(selectUser).loggedUser
@@ -19,6 +21,7 @@ const AlbumsPage = () => {
 
     useEffect(() => {
         dispatch(fetchAlbums());
+        dispatch(fetchPhotos());
     }, [dispatch]);
 
     const albums = useSelector(selectAlbums)
@@ -29,9 +32,7 @@ const AlbumsPage = () => {
             <main>
                 <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
                     {albums.map((album) => (
-                        <article key={album.id} className="flex mx-auto my-10 px-5 py-3 flex-col items-start justify-between shadow-lg ring-1 ring-inset ring-gray-300 rounded-lg">
-                            {album.title}
-                        </article>
+                        <AlbumComponent key={album.id} album={album} />
                     ))}
                 </div>
             </main>
