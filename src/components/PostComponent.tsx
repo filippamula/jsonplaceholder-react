@@ -5,6 +5,7 @@ import { UserCircleIcon, ChatBubbleBottomCenterTextIcon } from "@heroicons/react
 import { Collapse, Ripple, initTE } from "tw-elements";
 import CommentsComponent from "./CommentsComponent";
 import { Post } from "../model/Post";
+import MiniUserPortfolioComponent from "./MiniUserPortfolioComponent";
 
 interface PostsProps {
   post: Post;
@@ -23,18 +24,7 @@ const PostComponent: React.FC<PostsProps> = ({ post }) => {
 
   return (
     <div>
-      <div className="relative flex items-center gap-x-4">
-        <UserCircleIcon className="h-10 w-10 rounded-full bg-gray-50" />
-        <div className="text-sm leading-6">
-          <p className="font-semibold text-gray-900">
-            <a>
-              <span className="absolute inset-0" />
-              {getUser(post.userId).name}
-            </a>
-          </p>
-          <p className="text-gray-600">{getUser(post.userId).company.name}</p>
-        </div>
-      </div>
+      <MiniUserPortfolioComponent user={getUser(post.userId)} />
       <div className="group relative">
         <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900">
           <a>

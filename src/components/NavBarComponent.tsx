@@ -22,7 +22,7 @@ const NavBarComponent = () => {
     const navigation = [
         { name: 'Posts', path: '/posts', active: "/posts" == location.pathname },
         { name: 'Albums', path: '/albums', active: "/albums" == location.pathname },
-        { name: 'Todo', path: '/todo', active: "/todo" == location.pathname },
+        { name: 'Todo', path: '/todos', active: "/todos" == location.pathname },
     ]
 
 

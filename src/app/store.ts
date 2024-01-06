@@ -5,6 +5,7 @@ import postsReducer from "../features/PostsSlice";
 import commentsReducer from "../features/CommentsSlice";
 import albumsReducer from "../features/AlbumsSlice";
 import photosReducer from "../features/PhotosSlice";
+import todosReducer from "../features/TodosSlice";
 
 const store = configureStore({
     reducer:{
@@ -13,7 +14,8 @@ const store = configureStore({
         posts: postsReducer,
         comments: commentsReducer,
         albums: albumsReducer,
-        photos: photosReducer
+        photos: photosReducer,
+        todos: todosReducer
     }
 })
 
