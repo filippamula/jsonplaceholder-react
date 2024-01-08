@@ -1,9 +1,16 @@
 import { create } from "domain";
 import { Comment } from "../model/Comment";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export interface CommentState {
     comments: Comment[];
+}
+
+export interface AddCommentPayload {
+    postId: number;
+    title: string;
+    email: string | undefined;
+    comment: string;
 }
 
 export const fetchComments = createAsyncThunk("comments/fetchComments", async () => {
@@ -17,7 +24,21 @@ export const commentsSlice = createSlice({
     initialState: {
         comments: [],
     },
-    reducers: {},
+    reducers: {
+        addComment: (state: CommentState, action: PayloadAction<AddCommentPayload>) => {
+            if (action.payload.email === undefined) {
+                throw new Error("Email is undefined");
+            }
+            const newComment: Comment = {
+                postId: action.payload.postId,
+                id: Math.random(),
+                name: action.payload.title,
+                email: action.payload.email,
+                body: action.payload.comment,
+            };
+            state.comments.push(newComment);
+        }
+    },
     extraReducers: {
         [fetchComments.fulfilled.type]: (state, action) => {
             state.comments = action.payload;
@@ -26,4 +47,5 @@ export const commentsSlice = createSlice({
 });
 
 export default commentsSlice.reducer;
+export const { addComment } = commentsSlice.actions;
 export const selectComments = (state: { comments: CommentState }) => state.comments.comments;
