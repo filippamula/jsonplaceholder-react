@@ -17,7 +17,7 @@ const MiniUserPortfolioComponent: React.FC<PortfolioProps> = ({ user }) => {
                         {user.name}
                     </a>
                 </p>
-                <p className="text-gray-600">{user.company.name}</p>
+                <p className="text-gray-600">{user?.company?.name}</p>
             </div>
         </div>
     )

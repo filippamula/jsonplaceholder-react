@@ -9,6 +9,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState("")
     const users = useSelector(selectUsers)
     const navigate = useNavigate()
+    const [userDoesNotExist, setUserDoesNotExist] = useState(false)
 
     const dispatch = useDispatch<AppDispatch>()
     const handleLogin = (event: React.FormEvent) => {
@@ -19,7 +20,7 @@ const LoginPage = () => {
             navigate("/posts")
             return
         }
-        console.log("User not found")
+        setUserDoesNotExist(true)
     }
 
     return (
@@ -47,6 +48,7 @@ const LoginPage = () => {
                                     className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
+                            <div className='text-red-700 leading-4 mt-1 text-right'>{userDoesNotExist && 'User with this email does not exist!'}</div>
                         </div>
 
                         <div>
@@ -60,8 +62,8 @@ const LoginPage = () => {
                     </form>
 
                     <p className="mt-10 text-center text-sm text-gray-500">
-                        Not a member?{' '}
-                        <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                        Not a member?{" "}
+                        <a onClick={() => navigate("/register")} className="cursor-pointer font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                             Sign up now!
                         </a>
                     </p>

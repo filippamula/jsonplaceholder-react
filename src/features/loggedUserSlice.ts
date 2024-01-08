@@ -1,8 +1,8 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../model/User";
 
-interface LoggedUserState{
-    loggedUser: User| null
+interface LoggedUserState {
+    loggedUser: User | null
 }
 
 const initialState: LoggedUserState = {
@@ -22,6 +22,6 @@ export const loggedUserSlice = createSlice({
     }
 })
 
-export const {login, logout} = loggedUserSlice.actions
-export const selectUser = (state: {loggedUser: LoggedUserState}) => state.loggedUser
+export const { login, logout } = loggedUserSlice.actions
+export const selectUser = (state: { loggedUser: LoggedUserState }) => state.loggedUser
 export default loggedUserSlice.reducer
