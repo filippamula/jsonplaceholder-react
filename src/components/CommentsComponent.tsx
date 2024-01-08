@@ -71,6 +71,7 @@ const CommentsComponent: React.FC<CommentsProps> = ({ postId }) => {
           </div>
         </div>
       </form>
+      <div className='text-red-700 leading-4 mt-1 text-right'>{addCommentError && 'Adding comment error'}</div>
     </div >
   );
 };
