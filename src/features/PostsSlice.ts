@@ -1,8 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Post } from "../model/Post";
 
 export interface PostState {
     posts: Post[];
+}
+
+export interface AddPostPayload {
+    userId: number | undefined;
+    title: string;
+    body: string;
 }
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
@@ -16,7 +22,20 @@ export const postsSlice = createSlice({
     initialState: {
         posts: [],
     },
-    reducers: {},
+    reducers: {
+        addPost: (state: PostState, action: PayloadAction<AddPostPayload>) => {
+            if (action.payload.userId === undefined) {
+                throw new Error("User ID is undefined");
+            }
+            const newPost: Post = {
+                userId: action.payload.userId,
+                id: Math.random(),
+                title: action.payload.title,
+                body: action.payload.body,
+            };
+            state.posts.push(newPost);
+        }
+    },
     extraReducers: {
         [fetchPosts.fulfilled.type]: (state, action) => {
             state.posts = action.payload;
@@ -25,4 +44,5 @@ export const postsSlice = createSlice({
 });
 
 export default postsSlice.reducer;
+export const { addPost } = postsSlice.actions;
 export const selectPosts = (state: { posts: PostState }) => state.posts.posts;
