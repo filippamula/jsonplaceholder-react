@@ -2,7 +2,6 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { selectTodos } from "../features/TodosSlice"
-import { fetchTodos } from "../features/TodosSlice"
 import { selectUser } from "../features/loggedUserSlice";
 import { AppDispatch } from "../app/store"
 import NavBarComponent from "./NavBarComponent"
@@ -10,7 +9,6 @@ import TodoComponent from "./TodoComponent"
 
 const TodosPage = () => {
     const user = useSelector(selectUser).loggedUser
-    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -18,10 +16,6 @@ const TodosPage = () => {
             navigate("/")
         }
     })
-
-    useEffect(() => {
-        dispatch(fetchTodos());
-    }, [dispatch]);
 
     const todos = useSelector(selectTodos)
 

@@ -1,15 +1,13 @@
-import { Fragment, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, selectUser } from "../features/loggedUserSlice";
-import { AppDispatch } from "../app/store";
-import { fetchPosts, selectPosts } from "../features/PostsSlice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/loggedUserSlice";
+import { selectPosts } from "../features/PostsSlice";
 import NavBarComponent from "./NavBarComponent";
 import PostComponent from "./PostComponent";
 import { useNavigate } from "react-router-dom";
 
 const PostsPage = () => {
     const user = useSelector(selectUser).loggedUser
-    const dispatch = useDispatch<AppDispatch>()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -17,10 +15,6 @@ const PostsPage = () => {
             navigate("/")
         }
     })
-
-    useEffect(() => {
-        dispatch(fetchPosts());
-    }, [dispatch]);
 
     const posts = useSelector(selectPosts)
 

@@ -27,10 +27,6 @@ const CommentsComponent: React.FC<CommentsProps> = ({ postId }) => {
     }
   })
 
-  useEffect(() => {
-    dispatch(fetchComments());
-  }, [dispatch]);
-
   const handleAddComment = (event: React.FormEvent) => {
     event.preventDefault()
     try { dispatch(addComment({ postId, title, email: user?.email, comment })) }

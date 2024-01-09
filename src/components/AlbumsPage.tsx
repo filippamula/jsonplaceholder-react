@@ -19,11 +19,6 @@ const AlbumsPage = () => {
         }
     })
 
-    useEffect(() => {
-        dispatch(fetchAlbums());
-        dispatch(fetchPhotos());
-    }, [dispatch]);
-
     const albums = useSelector(selectAlbums)
 
     return (
