@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUsers } from "../features/UsersSlice";
-import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleBottomCenterTextIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Collapse, Ripple, initTE } from "tw-elements";
 import CommentsComponent from "./CommentsComponent";
 import { Post } from "../model/Post";
 import MiniUserPortfolioComponent from "./MiniUserPortfolioComponent";
+import { selectUser } from "../features/loggedUserSlice";
+import { AppDispatch } from "../app/store";
+import { deletePost } from "../features/PostsSlice";
 
 interface PostsProps {
   post: Post;
@@ -12,8 +15,11 @@ interface PostsProps {
 
 const PostComponent: React.FC<PostsProps> = ({ post }) => {
   initTE({ Collapse, Ripple })
+  const user = useSelector(selectUser).loggedUser
+  const dispatch = useDispatch<AppDispatch>()
 
   const users = useSelector(selectUsers)
+  const isLoggedUserAuthor = post.userId === user?.id
 
   const getUser = (id: number) => {
     let user = users.find(user => user.id === id)
@@ -21,9 +27,18 @@ const PostComponent: React.FC<PostsProps> = ({ post }) => {
     throw new Error("User not found")
   }
 
+  const handleDeletePost = () => {
+    if (isLoggedUserAuthor) {
+      dispatch(deletePost(post.id))
+    }
+  }
+
   return (
-    <div>
-      <MiniUserPortfolioComponent user={getUser(post.userId)} />
+    <div className="w-full">
+      <div className="flex w-full">
+        <MiniUserPortfolioComponent user={getUser(post.userId)} />
+        {isLoggedUserAuthor ? (<TrashIcon className="w-5 h-5 ml-auto hover:text-red-600 cursor-pointer" onClick={() => handleDeletePost()} />) : null}
+      </div>
       <div className="group relative">
         <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900">
           <a>
