@@ -37,6 +37,10 @@ export const commentsSlice = createSlice({
                 body: action.payload.comment,
             };
             state.comments.push(newComment);
+        },
+        deleteComment: (state: CommentState, action: PayloadAction<number>) => {
+            const index = state.comments.findIndex((comment) => comment.id === action.payload);
+            state.comments.splice(index, 1);
         }
     },
     extraReducers: {
@@ -47,5 +51,5 @@ export const commentsSlice = createSlice({
 });
 
 export default commentsSlice.reducer;
-export const { addComment } = commentsSlice.actions;
+export const { addComment, deleteComment } = commentsSlice.actions;
 export const selectComments = (state: { comments: CommentState }) => state.comments.comments;

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchComments, selectComments } from "../features/CommentsSlice";
-import { UserCircleIcon } from "@heroicons/react/24/outline";
+import { deleteComment, fetchComments, selectComments } from "../features/CommentsSlice";
+import { TrashIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { AppDispatch } from "../app/store";
 import { useEffect, useState } from "react";
 import { selectUser } from "../features/loggedUserSlice";
@@ -38,6 +38,10 @@ const CommentsComponent: React.FC<CommentsProps> = ({ postId }) => {
     }
   }
 
+  const handleDeleteComment = (id: number) => {
+    dispatch(deleteComment(id))
+  }
+
   const comments = useSelector(selectComments).filter(comment => comment.postId === postId)
 
   return (
@@ -47,12 +51,13 @@ const CommentsComponent: React.FC<CommentsProps> = ({ postId }) => {
           <li key={comment.email} className="flex justify-between gap-x-6 py-5">
             <div className="flex min-w-0 gap-x-4">
               <UserCircleIcon className="ml-2 h-6 w-6 text-gray-300" aria-hidden="true" />
-              <div className="min-w-0 flex-auto">
+              <div className="min-w-0 flex-auto overflow-clip">
                 <p className="mt-1 truncate text-xs leading-5 text-gray-500">{comment.email}</p>
                 <p className="mt-1 font-semibold leading-6 text-gray-900">{comment.name}</p>
                 <p className="text-sm text-gray-600">{comment.body}</p>
               </div>
             </div>
+            {user?.email === comment.email ? (<TrashIcon className="w-5 h-5 ml-auto hover:text-red-600 cursor-pointer" onClick={() => handleDeleteComment(comment.id)} />) : null}
           </li>
         ))}
       </ul>
