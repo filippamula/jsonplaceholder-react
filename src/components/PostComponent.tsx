@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
-import { selectPosts } from "../features/PostsSlice";
 import { selectUsers } from "../features/UsersSlice";
-import { UserCircleIcon, ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline";
+import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/outline";
 import { Collapse, Ripple, initTE } from "tw-elements";
 import CommentsComponent from "./CommentsComponent";
 import { Post } from "../model/Post";
