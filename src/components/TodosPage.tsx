@@ -6,6 +6,7 @@ import { selectUser } from "../features/loggedUserSlice";
 import { AppDispatch } from "../app/store"
 import NavBarComponent from "./NavBarComponent"
 import TodoComponent from "./TodoComponent"
+import AddTodoComponent from "./AddTodoComponent";
 
 const TodosPage = () => {
     const user = useSelector(selectUser).loggedUser
@@ -24,6 +25,7 @@ const TodosPage = () => {
             <NavBarComponent />
             <main>
                 <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+                    <AddTodoComponent />
                     {todos.map((todo) => (
                         <article key={todo.id} className="flex mx-auto my-10 px-5 py-3 flex-col items-start justify-between shadow-lg ring-1 ring-inset ring-gray-300 rounded-lg">
                             <TodoComponent todo={todo} />
