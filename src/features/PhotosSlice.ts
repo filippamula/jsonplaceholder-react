@@ -1,5 +1,5 @@
 import { Photo } from './../model/Photo';
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export interface PhotoState {
     photos: Photo[];
@@ -16,7 +16,12 @@ export const photoSlice = createSlice({
     initialState: {
         photos: [],
     },
-    reducers: {},
+    reducers: {
+        deletePhoto: (state: PhotoState, action: PayloadAction<number>) => {
+            const index = state.photos.findIndex((photo) => photo.id === action.payload);
+            state.photos.splice(index, 1);
+        }
+    },
     extraReducers: {
         [fetchPhotos.fulfilled.type]: (state, action) => {
             state.photos = action.payload;
@@ -25,4 +30,5 @@ export const photoSlice = createSlice({
 });
 
 export default photoSlice.reducer;
+export const { deletePhoto } = photoSlice.actions;
 export const selectPhotos = (state: { photos: PhotoState }) => state.photos.photos;
